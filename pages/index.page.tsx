@@ -9,15 +9,16 @@ import BodySingle from "dh-marvel/components/layouts/body/single/body-single";
 import { getComics } from "dh-marvel/services/marvel/marvel.service";
 import BodyCard from "dh-marvel/components/layouts/body/card/body-card";
 import UsePagination from "dh-marvel/components/layouts/body/pagination/body-pagination";
+import { Comic } from "types/types"; 
 
-interface Comic {
+/* interface Comic {
   id: number;
   title: string;
   thumbnail: {
     path: string;
     extension: string;
   }
-}
+} */
 
 const Index: NextPage = () => {
   const [page, setPage] = useState(1);

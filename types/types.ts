@@ -1,5 +1,5 @@
 export type Comic = {
-    id: string;
+    id: number;
     title: string;
     thumbnail: {
         path: string;

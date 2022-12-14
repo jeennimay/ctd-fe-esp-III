@@ -20,7 +20,7 @@ export const ComicDetail = ({ comic }: DataProps) => {
 
     return (
         <Container>
-            <CardMedia width="100px !important" height="200px" component="img" image={imgSrc} alt={`Front cover ${comic.title}`} />
+            <CardMedia component="img" image={imgSrc} alt={`Front cover ${comic.title}`} />
             <h1>{comic.title}</h1>
             <span>{comic.price}</span>
             <Button variant="outlined">{isStock ? "Comprar" : "Sem estoque"}</Button>
