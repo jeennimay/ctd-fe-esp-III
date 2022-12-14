@@ -5,9 +5,11 @@ export type Comic = {
         path: string;
         extension: string;
     };
+    oldPrice: number;
     price: number;
     stock: number;
     characters: Characters;
+    description: string;
 };
 
 export type Character = {
