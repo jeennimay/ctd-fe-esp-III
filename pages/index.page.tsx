@@ -11,15 +11,6 @@ import BodyCard from "dh-marvel/components/layouts/body/card/body-card";
 import UsePagination from "dh-marvel/components/layouts/body/pagination/body-pagination";
 import { Comic } from "types/types"; 
 
-/* interface Comic {
-  id: number;
-  title: string;
-  thumbnail: {
-    path: string;
-    extension: string;
-  }
-} */
-
 const Index: NextPage = () => {
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
