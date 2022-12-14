@@ -4,9 +4,6 @@ import Head from "next/head";
 
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Pagination from '@mui/material/Pagination';
-import Stack from '@mui/material/Stack';
 
 import BodySingle from "dh-marvel/components/layouts/body/single/body-single";
 import { getComics } from "dh-marvel/services/marvel/marvel.service";
@@ -69,13 +66,3 @@ const Index: NextPage = () => {
 };
 
 export default Index;
-
-
-//<BodyCard id={c.id} img={c.thumbnail.path + "." + c.thumbnail.extension} title={c.title} />
-
-/*
-<Stack spacing={2}>
-  <Typography>Page: {page}</Typography>
-  <Pagination count={10} page={page} onChange={handleChange} />
-</Stack>
-*/
