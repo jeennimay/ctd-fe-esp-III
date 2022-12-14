@@ -7,7 +7,7 @@ const PagList = styled('ul')({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  gap:'0.5rem',
+  gap: '0.5rem',
   margin: '2rem 0',
 });
 
@@ -17,19 +17,30 @@ const PagButton = styled('button')({
   padding: '0.5rem 0.75rem',
   background: '#1976d2',
   color: '#fff',
-  borderColor:'transparent',
+  borderColor: 'transparent',
   textTransform: 'uppercase',
+  borderRadius: '.25rem',
+  borderWidth: '.1rem',
+  cursor: 'pointer',
 })
 
-export default function UsePagination() {
+interface Pag {
+  count: number,
+  page: number,
+  handleChange: any,
+}
+
+export default function UsePagination({ count, page, handleChange }: Pag) {
   const { items } = usePagination({
-    count: 10,
+    count: count,
+    page: page,
+    onChange: handleChange,
   });
 
   return (
     <nav>
       <PagList>
-        {items.map(({ page, type, selected, ...item }, index) => {
+        {items.map(({ page, type, selected, disabled, ...item }, index) => {
           let children = null;
 
           if (type === 'start-ellipsis' || type === 'end-ellipsis') {
@@ -40,10 +51,9 @@ export default function UsePagination() {
                 type="button"
                 style={{
                   fontWeight: selected ? 'bolder' : undefined,
-                  fontSize: selected ? '1.25rem' : undefined,
                   background: selected ? '#fff' : undefined,
-                  color: selected ? '#1c54b2' : undefined,
-                  borderColor: selected ? '#1c54b2' : undefined,
+                  color: selected ? '#1976d2' : undefined,
+                  borderColor: selected ? '#1976d2' : undefined,
                 }}
                 {...item}
               >
@@ -52,7 +62,15 @@ export default function UsePagination() {
             );
           } else {
             children = (
-              <PagButton type="button" {...item}>
+              <PagButton
+                type="button"
+                style={{
+                  background: disabled ? 'Gainsboro' : undefined,
+                  color: disabled ? 'SlateGray' : undefined,
+                  cursor: disabled ? 'default' : undefined,
+                }}
+                {...item}
+              >
                 {type}
               </PagButton>
             );
