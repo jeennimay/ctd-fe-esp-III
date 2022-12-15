@@ -4,12 +4,13 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography'
 import { styled } from '@mui/system';
-import Link from 'next/link';
+import { BuyBtn } from '../buybtn/body-buybtn';
 
 interface Card {
     img: string,
     title: string,
     id: number,
+    stock: number,
 }
 
 const CardAct = styled(`div`)({
@@ -20,7 +21,7 @@ const CardAct = styled(`div`)({
     marginBottom: '1rem',
 })
 
-export default function BodyCard({ id, img, title }: Card) {
+export default function BodyCard({ id, img, title, stock }: Card) {
 
     return (
         <Card sx={{ height: 500 }} key={id}>
@@ -36,13 +37,9 @@ export default function BodyCard({ id, img, title }: Card) {
                 </Typography>
             </CardContent>
             <CardAct>
-                <Link href={`/checkout/${id}`}>
-                    <Button size="small" variant="contained">Buy</Button>
-                </Link>
-                <Link href={`/comics/${id}`}>
-                    <Button size="small" variant="outlined">Learn More</Button>
-                </Link>
-            </CardAct>
-        </Card>
+                <BuyBtn stock={stock} href={`/checkout/${id}`} />
+                <Button href={`/comics/${id}`} size="small" variant="outlined">Learn More</Button>
+        </CardAct>
+        </Card >
     )
 }
