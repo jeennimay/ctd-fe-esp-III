@@ -5,7 +5,8 @@ import { getComic } from 'dh-marvel/services/marvel/marvel.service';
 import BodySingle from "dh-marvel/components/layouts/body/single/body-single";
 
 import { styled } from '@mui/system';
-import { Box, Container } from "@mui/material";
+import { Box } from "@mui/material";
+import { BuyBtn } from "dh-marvel/components/layouts/body/buybtn/body-buybtn";
 
 interface DataProps {
     data: Comic
@@ -24,7 +25,7 @@ export const getStaticProps = async ({ params }: any) => {
 
     return {
         props: { data },
-        revalidate: 60 * 60
+        revalidate: 60 * 60,
     }
 }
 
@@ -59,11 +60,9 @@ const Price = styled('p')`
 `
 
 export default function DatailPage(props: DataProps) {
-    const comic = props?.data;
+    const comic = props.data;
     const oPrice = (comic.oldPrice).toFixed(2);
     const price = (comic.price).toFixed(2);
-
-    console.log(comic);
 
     if (!comic) {
         return (
@@ -126,6 +125,17 @@ export default function DatailPage(props: DataProps) {
                             <Price className="primary">Price</Price>
                             <Price className="secondary">${oPrice}</Price>
                             <Price className="primary">${price}</Price>
+                            <BuyBtn
+                                stock={comic.stock}
+                                href={`/checkout/${comic.id}`}
+                                items={{
+                                    size: 'large',
+                                    style: {
+                                        margin: '1rem',
+                                        position: 'inherit',
+                                    }
+                                }}
+                            />
                         </div>
                     </Box>
                 </Box>
