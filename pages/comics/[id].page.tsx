@@ -5,7 +5,7 @@ import { getComic } from 'dh-marvel/services/marvel/marvel.service';
 import BodySingle from "dh-marvel/components/layouts/body/single/body-single";
 
 import { styled } from '@mui/system';
-import { Box } from "@mui/material";
+import { Box, Container } from "@mui/material";
 
 interface DataProps {
     data: Comic
@@ -34,12 +34,36 @@ const Description = styled(`p`)({
 
 })
 
+const Price = styled('p')`
+    text-align: right;
+    margin: 0 auto;
+    &.primary{
+        color: white;
+        font-weight: bolder;
+        font-size: x-large;
+
+        :first-child{
+            margin: 0.75rem 0;
+            text-decoration: underline;
+            font-family: Tahoma, Geneva, Verdana, sans-serif;
+            letter-spacing: 2px;
+            text-align: left;
+            text-transform: uppercase;
+        }
+    }
+    
+    &.secondary{
+        color: lightgray;
+        text-decoration: line-through;
+    }
+`
+
 export default function DatailPage(props: DataProps) {
     const comic = props?.data;
     const oPrice = (comic.oldPrice).toFixed(2);
     const price = (comic.price).toFixed(2);
 
-    console.log(comic)
+    console.log(comic);
 
     if (!comic) {
         return (
@@ -81,10 +105,28 @@ export default function DatailPage(props: DataProps) {
                             alt={comic.title}
                         />
                     </picture>
-                    <Box>
+                    <Box
+                        display='flex'
+                        justifyContent='center'
+                        flexWrap='wrap'
+                    >
                         <Description>{comic.description}</Description>
-                        <p>${oPrice}</p>
-                        <p>${price}</p>
+                        <div
+                            style={{
+                                margin: '1rem',
+                                padding: '0.5rem 1.5rem',
+                                background: '#1976d2',
+                                border: 'solid #1976d2 1px',
+                                borderRadius: '.5rem',
+                                height: '9rem',
+                                width: '14rem',
+                            }}
+
+                        >
+                            <Price className="primary">Price</Price>
+                            <Price className="secondary">${oPrice}</Price>
+                            <Price className="primary">${price}</Price>
+                        </div>
                     </Box>
                 </Box>
             </BodySingle>
