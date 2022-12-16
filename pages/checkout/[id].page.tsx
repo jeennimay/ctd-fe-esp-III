@@ -39,9 +39,12 @@ const Flag = styled(`span`)`
     font-size: large;
 `
 
-interface Inputs extends CheckoutInput{};
+interface Inputs extends CheckoutInput { };
 
 const Checkout: NextPage<DataProps> = ({ data }: DataProps) => {
+
+    //const URL_AXIOS = "https://localhost:3000";
+    const URL_AXIOS = "https://ctd-fe-esp-iii-jeennimay.vercel.app/";
 
     const { register, handleSubmit, formState: { errors } } = useForm<Inputs>({
         resolver: yupResolver(checkoutSchema)
@@ -63,13 +66,13 @@ const Checkout: NextPage<DataProps> = ({ data }: DataProps) => {
             }
         };
 
-        await axios.post("/api/checkout", payload)
+        await axios.post(`${URL_AXIOS}/api/checkout`, payload)
             .then(res => {
                 handleCheckout(res.data.data);
                 router.push("/checkout/success")
             }).catch(err => {
                 setOpen(true);
-                let e = err.response.data.message;
+                let e = err.response;
                 console.log(e)
                 setMessageError(e);
             });
@@ -84,294 +87,291 @@ const Checkout: NextPage<DataProps> = ({ data }: DataProps) => {
             </Head>
 
             <LayoutCheckout>
-                <BodySingle title="Checkout">
-                    <Container
-                        sx={{
-                            display: 'flex',
-                            gap: "2rem",
-                            justifyContent: "space-around",
-                        }}
-                    >
-                        <FormControl component={"form"} onSubmit={handleSubmit(onSubmit)}>
-                            <Card sx={{ padding: '2rem' }}>
+                <Container
+                    sx={{
+                        display: 'flex',
+                        gap: "4rem",
+                        marginTop: '4rem',
+                    }}
+                >
+                    <FormControl component={"form"} onSubmit={handleSubmit(onSubmit)}>
+                        <Card sx={{ padding: '2rem' }}>
 
-                                <Typography variant="h6">Personal data:</Typography>
-                                <InputBox>
-                                    <TextField
-                                        {...register("customer.name")}
-                                        label="Name"
-                                        type="text"
-                                        error={!!errors.customer?.name}
-                                        required
-                                    />
-                                    {
-                                        !!errors.customer?.name &&
-                                        <Typography
-                                            color="red"
-                                            variant="body2"
-                                            component="div"
-                                        >
-                                            {`${errors.customer?.name.message}`}
-                                        </Typography>
-                                    }
-                                </InputBox>
-                                <InputBox>
-                                    <TextField
-                                        {...register("customer.lastname")}
-                                        label="Last Name"
-                                        type="text"
-                                        error={!!errors.customer?.lastname}
-                                        required
-                                    />
-                                    {
-                                        !!errors.customer?.lastname &&
-                                        <Typography
-                                            color="error"
-                                            variant="body2"
-                                            component="div"
-                                        >
-                                            {`${errors.customer?.lastname.message}`}
-                                        </Typography>
-                                    }
-                                </InputBox>
-                                <InputBox>
-                                    <TextField
-                                        {...register("customer.email")}
-                                        label="E-mail"
-                                        type="email"
-                                        error={!!errors.customer?.email}
-                                        required
-                                    />
-                                    {
-                                        !!errors.customer?.email &&
-                                        <Typography
-                                            color="red"
-                                            variant="body2"
-                                            component="div"
-                                        >
-                                            {`${errors.customer?.email.message}`}
-                                        </Typography>
-                                    }
-                                </InputBox>
-                            </Card>
-                            <Card sx={{ padding: '2rem', marginTop: '1.5rem' }}>
-                                <Typography sx={{ flexBasis: "100%" }}>Address: </Typography>
-                                <InputBox>
-                                    <TextField
-                                        {...register("customer.address.address1")}
-                                        label="Adress"
-                                        type="text"
-                                        error={!!errors.customer?.address?.address1}
-                                        required
-                                    />
-                                    {
-                                        !!errors.customer?.address?.address1 &&
-                                        <Typography
-                                            color="red"
-                                            variant="body2"
-                                            component="div"
-                                        >
-                                            {`${errors.customer?.address?.address1.message}`}
-                                        </Typography>
-                                    }
-                                </InputBox>
-                                <InputBox>
-                                    <TextField
-                                        {...register("customer.address.address2")}
-                                        label="Complement"
-                                        type="text"
-                                        error={!!errors.customer?.address?.address2}
-                                    />
-                                </InputBox>
-                                <InputBox>
-                                    <TextField
-                                        {...register("customer.address.city")}
-                                        label="City"
-                                        type="text"
-                                        error={!!errors.customer?.address?.city}
-                                        required
-                                    />
-                                    {
-                                        !!errors.customer?.address?.city &&
-                                        <Typography
-                                            color="red"
-                                            variant="body2"
-                                            component="div"
-                                        >
-                                            {`${errors.customer?.address?.city.message}`}
-                                        </Typography>
-                                    }
-                                </InputBox>
-                                <InputBox>
-                                    <TextField
-                                        {...register("customer.address.state")}
-                                        label="State"
-                                        type="text"
-                                        error={!!errors.customer?.address?.state}
-                                        required
-                                    />
-                                    {
-                                        !!errors.customer?.address?.state &&
-                                        <Typography
-                                            color="red"
-                                            variant="body2"
-                                            component="div"
-                                        >
-                                            {`${errors.customer?.address?.state.message}`}
-                                        </Typography>
-                                    }
-                                </InputBox>
-                                <InputBox>
-                                    <TextField
-                                        {...register("customer.address.zipCode")}
-                                        label="Zip Code"
-                                        type="text"
-                                        error={!!errors.customer?.address?.zipCode}
-                                        required
-                                    />
-                                    {
-                                        !!errors.customer?.address?.zipCode &&
-                                        <Typography
-                                            color="red"
-                                            variant="body2"
-                                            component="div"
-                                        >
-                                            {`${errors.customer?.address?.zipCode.message}`}
-                                        </Typography>
-                                    }
-                                </InputBox>
-                            </Card>
-                            <Card sx={{ padding: '2rem', margin: '1.5rem 0' }}>
-                                <Typography sx={{ flexBasis: "100%" }}>Payment card: </Typography>
-                                <InputBox>
-                                    <TextField
-                                        {...register("card.number")}
-                                        label="Card number"
-                                        inputProps={{ maxLength: 19 }}
-                                        inputMode="numeric"
-                                        error={!!errors.card?.number}
-                                        required
-                                    />
-                                    {
-                                        !!errors.card?.number &&
-                                        <Typography
-                                            color="red"
-                                            variant="body2"
-                                            component="div"
-                                        >
-                                            {`${errors.card.number.message}`}
-                                        </Typography>
-                                    }
-                                </InputBox>
-                                <InputBox>
-                                    <TextField
-                                        {...register("card.nameOnCard")}
-                                        label="Name on card"
-                                        type="text"
-                                        error={!!errors.card?.nameOnCard}
-                                        required
-                                    />
-                                    {
-                                        !!errors.card?.nameOnCard &&
-                                        <Typography
-                                            color="red"
-                                            variant="body2"
-                                            component="div"
-                                        >
-                                            {`${errors.card?.nameOnCard?.message}`}
-                                        </Typography>
-                                    }
-                                </InputBox>
-                                <InputBox>
-                                    <TextField
-                                        {...register("card.expDate")}
-                                        label="Expiration date"
-                                        type="text"
-                                        error={!!errors.card?.expDate}
-                                        required
-                                    />
-                                    {
-                                        !!errors.card?.expDate &&
-                                        <Typography
-                                            color="red"
-                                            variant="body2"
-                                            component="div"
-                                        >
-                                            {`${errors.card?.expDate?.message}`}
-                                        </Typography>
-                                    }
-                                </InputBox>
-                                <InputBox>
-                                    <TextField
-                                        {...register("card.cvc")}
-                                        inputProps={{ maxLength: 3, "data-testid": "cvc" }}
-                                        label="CVC"
-                                        type="password"
-                                        error={!!errors.card?.cvc}
-                                        required
-                                    />
-                                    {
-                                        !!errors.card?.cvc &&
-                                        <Typography
-                                            color="red"
-                                            variant="body2"
-                                            component="div"
-                                        >
-                                            {`${errors.card?.cvc?.message}`}
-                                        </Typography>
-                                    }
-                                </InputBox>
-                            </Card>
-                            <Button type="submit" color='primary' variant="contained"
+                            <Typography variant="h6">Personal data:</Typography>
+                            <InputBox>
+                                <TextField
+                                    {...register("customer.name")}
+                                    label="Name"
+                                    type="text"
+                                    error={!!errors.customer?.name}
+                                    required
+                                />
+                                {
+                                    !!errors.customer?.name &&
+                                    <Typography
+                                        color="red"
+                                        variant="body2"
+                                        component="div"
+                                    >
+                                        {`${errors.customer?.name.message}`}
+                                    </Typography>
+                                }
+                            </InputBox>
+                            <InputBox>
+                                <TextField
+                                    {...register("customer.lastname")}
+                                    label="Last Name"
+                                    type="text"
+                                    error={!!errors.customer?.lastname}
+                                    required
+                                />
+                                {
+                                    !!errors.customer?.lastname &&
+                                    <Typography
+                                        color="error"
+                                        variant="body2"
+                                        component="div"
+                                    >
+                                        {`${errors.customer?.lastname.message}`}
+                                    </Typography>
+                                }
+                            </InputBox>
+                            <InputBox>
+                                <TextField
+                                    {...register("customer.email")}
+                                    label="E-mail"
+                                    type="email"
+                                    error={!!errors.customer?.email}
+                                    required
+                                />
+                                {
+                                    !!errors.customer?.email &&
+                                    <Typography
+                                        color="red"
+                                        variant="body2"
+                                        component="div"
+                                    >
+                                        {`${errors.customer?.email.message}`}
+                                    </Typography>
+                                }
+                            </InputBox>
+                        </Card>
+                        <Card sx={{ padding: '2rem', marginTop: '1.5rem' }}>
+                            <Typography sx={{ flexBasis: "100%" }}>Address: </Typography>
+                            <InputBox>
+                                <TextField
+                                    {...register("customer.address.address1")}
+                                    label="Adress"
+                                    type="text"
+                                    error={!!errors.customer?.address?.address1}
+                                    required
+                                />
+                                {
+                                    !!errors.customer?.address?.address1 &&
+                                    <Typography
+                                        color="red"
+                                        variant="body2"
+                                        component="div"
+                                    >
+                                        {`${errors.customer?.address?.address1.message}`}
+                                    </Typography>
+                                }
+                            </InputBox>
+                            <InputBox>
+                                <TextField
+                                    {...register("customer.address.address2")}
+                                    label="Complement"
+                                    type="text"
+                                    error={!!errors.customer?.address?.address2}
+                                />
+                            </InputBox>
+                            <InputBox>
+                                <TextField
+                                    {...register("customer.address.city")}
+                                    label="City"
+                                    type="text"
+                                    error={!!errors.customer?.address?.city}
+                                    required
+                                />
+                                {
+                                    !!errors.customer?.address?.city &&
+                                    <Typography
+                                        color="red"
+                                        variant="body2"
+                                        component="div"
+                                    >
+                                        {`${errors.customer?.address?.city.message}`}
+                                    </Typography>
+                                }
+                            </InputBox>
+                            <InputBox>
+                                <TextField
+                                    {...register("customer.address.state")}
+                                    label="State"
+                                    type="text"
+                                    error={!!errors.customer?.address?.state}
+                                    required
+                                />
+                                {
+                                    !!errors.customer?.address?.state &&
+                                    <Typography
+                                        color="red"
+                                        variant="body2"
+                                        component="div"
+                                    >
+                                        {`${errors.customer?.address?.state.message}`}
+                                    </Typography>
+                                }
+                            </InputBox>
+                            <InputBox>
+                                <TextField
+                                    {...register("customer.address.zipCode")}
+                                    label="Zip Code"
+                                    type="text"
+                                    error={!!errors.customer?.address?.zipCode}
+                                    required
+                                />
+                                {
+                                    !!errors.customer?.address?.zipCode &&
+                                    <Typography
+                                        color="red"
+                                        variant="body2"
+                                        component="div"
+                                    >
+                                        {`${errors.customer?.address?.zipCode.message}`}
+                                    </Typography>
+                                }
+                            </InputBox>
+                        </Card>
+                        <Card sx={{ padding: '2rem', margin: '1.5rem 0' }}>
+                            <Typography sx={{ flexBasis: "100%" }}>Payment card: </Typography>
+                            <InputBox>
+                                <TextField
+                                    {...register("card.number")}
+                                    label="Card number"
+                                    inputProps={{ maxLength: 19 }}
+                                    inputMode="numeric"
+                                    error={!!errors.card?.number}
+                                    required
+                                />
+                                {
+                                    !!errors.card?.number &&
+                                    <Typography
+                                        color="red"
+                                        variant="body2"
+                                        component="div"
+                                    >
+                                        {`${errors.card.number.message}`}
+                                    </Typography>
+                                }
+                            </InputBox>
+                            <InputBox>
+                                <TextField
+                                    {...register("card.nameOnCard")}
+                                    label="Name on card"
+                                    type="text"
+                                    error={!!errors.card?.nameOnCard}
+                                    required
+                                />
+                                {
+                                    !!errors.card?.nameOnCard &&
+                                    <Typography
+                                        color="red"
+                                        variant="body2"
+                                        component="div"
+                                    >
+                                        {`${errors.card?.nameOnCard?.message}`}
+                                    </Typography>
+                                }
+                            </InputBox>
+                            <InputBox>
+                                <TextField
+                                    {...register("card.expDate")}
+                                    label="Expiration date"
+                                    type="text"
+                                    error={!!errors.card?.expDate}
+                                    required
+                                />
+                                {
+                                    !!errors.card?.expDate &&
+                                    <Typography
+                                        color="red"
+                                        variant="body2"
+                                        component="div"
+                                    >
+                                        {`${errors.card?.expDate?.message}`}
+                                    </Typography>
+                                }
+                            </InputBox>
+                            <InputBox>
+                                <TextField
+                                    {...register("card.cvc")}
+                                    inputProps={{ maxLength: 3, "data-testid": "cvc" }}
+                                    label="CVC"
+                                    type="password"
+                                    error={!!errors.card?.cvc}
+                                    required
+                                />
+                                {
+                                    !!errors.card?.cvc &&
+                                    <Typography
+                                        color="red"
+                                        variant="body2"
+                                        component="div"
+                                    >
+                                        {`${errors.card?.cvc?.message}`}
+                                    </Typography>
+                                }
+                            </InputBox>
+                        </Card>
+                        <Button type="submit" color='primary' variant="contained"
+                            sx={{
+                                marginBottom: '1rem',
+                                fontWeight: 'bold',
+                            }}
+                        >
+                            Confirm
+                        </Button>
+                    </FormControl>
+
+                    <Card sx={{ maxWidth: '30vw', maxHeight: '70vw' }}>
+                        <Typography variant="h4" marginTop='1rem' textAlign='center'>
+                            Product
+                        </Typography>
+                        <CardMedia
+                            component="img"
+                            sx={{ margin: '1.5rem 0' }}
+                            image={`${data.thumbnail.path}.${data.thumbnail.extension}`}
+                            alt={data.title}
+                        />
+                        <CardContent>
+                            <Typography variant="h6" component="div">
+                                <Flag>Title:</Flag> {data.title}
+                            </Typography>
+                            <Typography
+                                variant="h5"
                                 sx={{
+                                    marginTop: '1rem',
                                     marginBottom: '1rem',
-                                    fontWeight: 'bold',
                                 }}
                             >
-                                Confirm
-                            </Button>
-                        </FormControl>
-
-                        <Card sx={{ maxWidth: 345, maxHeight: '70vw' }}>
-                            <Typography variant="h4" marginTop='1rem' textAlign='center'>
-                                Product
+                                <Flag>Price:</Flag> ${(data.price).toFixed(2)}
                             </Typography>
-                            <CardMedia
-                                component="img"
-                                height='65%'
-                                sx={{ margin: '1.5rem 0' }}
-                                image={`${data.thumbnail.path}.${data.thumbnail.extension}`}
-                                alt={data.title}
-                            />
-                            <CardContent>
-                                <Typography variant="h6" component="div">
-                                    <Flag>Title:</Flag> {data.title}
-                                </Typography>
-                                <Typography
-                                    variant="h5"
-                                    sx={{
-                                        marginTop: '1rem',
-                                        marginBottom: '1rem',
-                                    }}
-                                >
-                                    <Flag>Price:</Flag> ${(data.price).toFixed(2)}
-                                </Typography>
-                            </CardContent>
-                        </Card>
-                        <Snackbar
-                            anchorOrigin={{ vertical: "top", horizontal: "right" }}
-                            open={open}
-                            autoHideDuration={2000}
-                            key={1}
-                            data-testid="alert-error"
-                            onClose={() => setOpen(false)}
-                        >
-                            <div>
-                                <Alert severity="error">{messageError}</Alert>
-                            </div>
-                        </Snackbar>
-                    </Container>
-                </BodySingle>
+                        </CardContent>
+                    </Card>
+                    <Snackbar
+                        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+                        open={open}
+                        autoHideDuration={2000}
+                        key={1}
+                        data-testid="alert-error"
+                    //onClose={() => setOpen(false)}
+                    >
+                        <div>
+                            <Alert severity="error">{messageError}</Alert>
+                        </div>
+                    </Snackbar>
+                </Container>
             </LayoutCheckout>
         </>
     )

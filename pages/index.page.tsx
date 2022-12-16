@@ -33,6 +33,8 @@ const Index: NextPage = () => {
     })()
   }, [page]);
 
+  console.log(comics)
+
   if (!comics) {
     return (
       <>
