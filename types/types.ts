@@ -25,69 +25,59 @@ export type Character = {
     comics: {
         available: number
         collectionURI: string
-        items: [
+        items:
             {
                 resourceURI: string
                 name: string
-            },
-
-        ],
+            }[],
         returned: number
     },
     series: {
         available: number,
         collectionURI: string,
-        items: [
+        items: 
             {
                 resourceURI: string,
                 name: string
-            },
-
-        ],
+            }[],
         returned: number
     },
     stories: {
         available: number,
         collectionURI: string,
-        items: [
+        items:
             {
                 resourceURI: string,
                 name: string,
                 type: string
-            },
-
-        ],
+            }[],
         returned: number
     },
     events: {
         available: number,
         collectionURI: string,
-        items: [
+        items:
             {
                 resourceURI: string,
                 name: string
-            }
-        ],
+            }[],
         returned: number
     },
-    urls: [
+    urls:
         {
             type: string
             url: string
-        },
-
-    ]
+        }[],
 }
 
 export type Characters = {
     available: number;
     returned: number;
     collectionURI: string;
-    items: Items[];
-};
-
-export type Items = {
-    resourceURI: string;
-    name: string;
-    role: string;
+    items:
+        {
+            resourceURI: string;
+            name: string;
+            role: string;
+        }[],
 };
