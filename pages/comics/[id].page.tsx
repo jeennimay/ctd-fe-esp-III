@@ -9,6 +9,7 @@ import { styled } from '@mui/system';
 import { Box} from "@mui/material";
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography'
+import { BodySmallCard } from "dh-marvel/components/layouts/body/card/body-smallCard";
 
 interface DataProps {
     data: Comic,
@@ -60,18 +61,11 @@ const Price = styled('p')`
     }
 `
 
-const SmallCard = styled(`div`)`
-    width: 25vw;
-    border: solid 1px #1976d2;
-    padding: 1rem;
-    border-radius:1.5rem;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    text-align: center;
-    margin: 0.5rem 2rem;    
+const Thumbnail = styled(`img`)`
+    @media (max-screen: 899){
+        width:'100%';
+    }
 `
-
 
 export default function DatailPage(props: DataProps) {
     const comic = props?.data;
@@ -120,7 +114,7 @@ export default function DatailPage(props: DataProps) {
                     }}
                 >
                     <picture>
-                        <img
+                        <Thumbnail
                             src={comic.thumbnail.path + "." + comic.thumbnail.extension}
                             alt={comic.title}
                         />
@@ -163,23 +157,7 @@ export default function DatailPage(props: DataProps) {
                     {
                         getCharacters.map(c => {
                             return (
-                                <SmallCard key={c.id}>
-                                    <Typography gutterBottom variant="h4" component="div" marginTop='1rem'>
-                                        {c.name}
-                                    </Typography>
-                                    <Button 
-                                    href={`/characters/${c.id}`}
-                                    size="large"
-                                    variant="contained"
-                                    sx={{
-                                        fontWeight:'bold',
-                                        fontSize: '1.2rem',
-                                        margin: '1rem 0'
-                                    }}
-                                    >
-                                        Learn More
-                                        </Button>
-                                </SmallCard>
+                                <BodySmallCard id={c.id} title={c.name} href={`/characters/${c.id}`} />
                             )
                         })
                     }
