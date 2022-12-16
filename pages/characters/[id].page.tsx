@@ -5,6 +5,7 @@ import BodySingle from "dh-marvel/components/layouts/body/single/body-single";
 import { getCharacter } from "dh-marvel/services/marvel/marvel.service";
 import { Character } from "../../types/types";
 import { Button, Typography, Grid } from "@mui/material";
+import { BodySmallCard } from "dh-marvel/components/layouts/body/card/body-smallCard";
 
 
 export const getStaticPaths = async () => {
@@ -16,7 +17,6 @@ export const getStaticPaths = async () => {
 
 export async function getStaticProps({ params }: any) {
     const data = await getCharacter(Number(params.id))
-    console.log(data)
 
     return {
         props: {
@@ -29,23 +29,10 @@ export async function getStaticProps({ params }: any) {
 const Description = styled(`p`)({
     padding: '1rem',
     textAlign: 'justify',
-    fontSize: '2rem',
+    fontSize: '1.25rem',
     textIndent: '1rem'
 })
 
-const SmallCard = styled(`div`)`
-    width: 25vw;
-    height: 20rem;
-    border: solid 1px #1976d2;
-    padding: 1rem;
-    border-radius:1.5rem;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-end;
-    justify-content: center;
-    text-align: center;
-    margin: 0.5rem 2rem;    
-`
 interface CharacterDetail {
     data: Character;
 };
@@ -94,40 +81,26 @@ export default function CharacterDetail({ data }: CharacterDetail) {
                 flexGrow='column'
                 flexWrap = 'wrap'
                 >
-                    <picture>
+                    <Box>
                         <img
                             src={charac?.thumbnail.path + "." + charac?.thumbnail.extension}
                             alt={charac?.name}
+                            style={{
+                                width:'100%',
+                            }}
                         />
-                    </picture>
+                    </Box>
                     <Description>{charac?.description}</Description>
                     <Grid
                         container
                         spacing={4}
+                        columns={{ xs: 1, sm: 4, md: 12 }}
                         marginBottom='2rem'
                     >
                         {
                             getComics.map(c => {
                                 return (
-                                    <Grid item key={c.id}>
-                                        <SmallCard>
-                                            <Typography gutterBottom variant="h4" component="div" marginTop='1rem'>
-                                                {c.name}
-                                            </Typography>
-                                            <Button
-                                                href={`/comics/${c.id}`}
-                                                variant="contained"
-                                                size="large"
-                                                sx={{
-                                                    height: '25%',
-                                                    fontWeight: 'bold',
-                                                    margin: '1rem 0'
-                                                }}
-                                            >
-                                                Learn More
-                                            </Button>
-                                        </SmallCard>
-                                    </Grid>
+                                    <BodySmallCard id={c.id} title={c.name} href={`/comics/${c.id}`} />
                                 )
                             })
                         }
