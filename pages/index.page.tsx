@@ -33,7 +33,6 @@ const Index: NextPage = () => {
     })()
   }, [page]);
 
-  console.log(comics)
   if (!comics) {
     return (
       <>
@@ -63,7 +62,7 @@ const Index: NextPage = () => {
           <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }} >
             {comics?.map((c) => (
               <Grid item xs={2} sm={4} md={4} key={c.id}>
-                <BodyCard id={c.id} img={c.thumbnail.path + "." + c.thumbnail.extension} title={c.title} />
+                <BodyCard id={c.id} img={c.thumbnail.path + "." + c.thumbnail.extension} title={c.title} stock={c.stock} />
               </Grid>
             ))}
           </Grid>
