@@ -11,11 +11,9 @@ const LayoutCheckout: FC<PropsWithChildren> = ({
   return (
     <>
       <Stack direction={"column"} height={"100%"}>
-        <GeneralHeader variant={"simple"} />
         <Box display={"flex"} flexGrow={1}>
           {children}
         </Box>
-        <GeneralFooter />
       </Stack>
     </>
   );
