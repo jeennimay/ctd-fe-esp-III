@@ -4,7 +4,7 @@ import Head from "next/head";
 import BodySingle from "dh-marvel/components/layouts/body/single/body-single";
 import { getCharacter } from "dh-marvel/services/marvel/marvel.service";
 import { Character } from "../../types/types";
-import { Button, Typography, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import { BodySmallCard } from "dh-marvel/components/layouts/body/card/body-smallCard";
 
 

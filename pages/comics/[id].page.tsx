@@ -6,9 +6,7 @@ import BodySingle from "dh-marvel/components/layouts/body/single/body-single";
 import { BuyBtn } from "dh-marvel/components/layouts/body/buybtn/body-buybtn";
 
 import { styled } from '@mui/system';
-import { Box} from "@mui/material";
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography'
+import { Box, Grid } from "@mui/material";
 import { BodySmallCard } from "dh-marvel/components/layouts/body/card/body-smallCard";
 
 interface DataProps {
@@ -61,7 +59,7 @@ const Price = styled('p')`
     }
 `
 
-const Thumbnail = styled(`img`)`
+const Thumbnail = styled('img')`
     @media (max-screen: 899){
         width:'100%';
     }
@@ -153,7 +151,13 @@ export default function DatailPage(props: DataProps) {
                         />
                     </Box>
                 </Box>
-                <Box>
+                <Grid
+                    container
+                    spacing={4}
+                    columns={{ xs: 1, sm: 4, md: 12 }}
+                    marginBottom='2rem'
+                >
+
                     {
                         getCharacters.map(c => {
                             return (
@@ -161,7 +165,7 @@ export default function DatailPage(props: DataProps) {
                             )
                         })
                     }
-                </Box>
+                </Grid>
             </BodySingle>
         </>
     )
