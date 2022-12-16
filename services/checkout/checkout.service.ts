@@ -1,8 +1,8 @@
 import axios from "axios";
+import { CheckoutInput } from "dh-marvel/features/checkout/checkout.types";
 import { useMutation } from "react-query";
-import { CheckoutData } from "types/types";
 
-export async function createCheckout(data: CheckoutData) {
+export async function createCheckout(data: CheckoutInput) {
 
     try {
         const response = await axios.post(
