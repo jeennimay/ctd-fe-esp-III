@@ -6,10 +6,9 @@ import BodySingle from "dh-marvel/components/layouts/body/single/body-single";
 import { BuyBtn } from "dh-marvel/components/layouts/body/buybtn/body-buybtn";
 
 import { styled } from '@mui/system';
-import { Box, Grid } from "@mui/material";
+import { Box} from "@mui/material";
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography'
-import Card from '@mui/material/Card';
 
 interface DataProps {
     data: Comic,
