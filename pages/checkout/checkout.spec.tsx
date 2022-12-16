@@ -1,25 +1,14 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Checkout } from "dh-marvel/pages/checkout/[id].page";
+import comic from "dh-marvel/test/mocks/comic";
 import { server } from "dh-marvel/test/server";
 
 describe("Testing checkout page", () => {
     beforeAll(() => {
         server.listen()
         render(<Checkout
-            data={{
-                id: 376,
-                title: string,
-                thumbnail: {
-                    path: string,
-                    extension: string,
-                },
-                oldPrice: number,
-                price: number,
-                stock: number,
-                characters: Characters,
-                description: string,
-            }}
+            data={comic}
         />);
     });
     afterAll(() => server.close());
