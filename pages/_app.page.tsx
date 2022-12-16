@@ -25,7 +25,9 @@ function MyApp({ Component, pageProps }: AppProps) {
           <CssBaseline />
           <LayoutGeneral>
             <ToastContainer />
+            {/* <CheckoutContextProvider> */}
               <Component {...pageProps} />
+            {/* </CheckoutContextProvider> */}
           </LayoutGeneral>
           <style jsx global>{`
         /* Other global styles such as 'html, body' etc... */
