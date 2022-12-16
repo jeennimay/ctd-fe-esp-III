@@ -8,7 +8,6 @@ const SmallCard = styled(`div`)`
     padding: 1rem;
     border-radius:1.5rem;
     display: flex;
-    flex-wrap: wrap;
     flex-direction: column;
     justify-content: center;
     text-align: center;
