@@ -14,11 +14,11 @@ export const checkoutSchema = yup.object().shape({
       }),
     }),
     card: yup.object({
-      number: yup.string().matches(/[0-9]+\s[0-9]+\s[0-9]+\s[0-9]/).min(19).max(19).required(),
+      number: yup.string().matches(/[0-9]+\s[0-9]+\s[0-9]+\s[0-9]/, "Invalid format").min(19).max(19).required(),
       nameOnCard: yup.string().required(),
       expDate: yup.string()
         .required()
-        .matches(/(0[1-9]|10|11|12)[/](20\d{2})/)
+        .matches(/(0[1-9]|10|11|12)[/](20\d{2})/, "Incorrect expiration date")
         .min(
           7,
           "DD/AAAA"
