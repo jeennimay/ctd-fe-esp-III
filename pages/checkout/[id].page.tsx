@@ -63,7 +63,7 @@ const Checkout: NextPage<DataProps> = ({ data }: DataProps) => {
             }
         };
 
-        await axios.post("/api/checkout.routes", payload)
+        await axios.post("/api/checkout", payload)
             .then(res => {
                 handleCheckout(res.data.data);
                 router.push("/checkout/success")

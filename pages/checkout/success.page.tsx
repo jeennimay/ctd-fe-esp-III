@@ -8,16 +8,18 @@ import BodySingle from "dh-marvel/components/layouts/body/single/body-single";
 import { Typography, Container, Box, CardMedia } from "@mui/material";
 import LayoutCheckout from "dh-marvel/components/layouts/layout-checkout";
 
-export default function Success() {
+const Success = () => {
     const { checkout } = useContext(CheckoutContext);
+    console.log(checkout)
+    /*
     const { customer, order } = checkout;
     const { address } = customer;
 
-    /* 
+     
     if(!checkout) {
         return <BodySingle title="Sorry, we had a problem :(" />
     }
-     */
+    
 
     return (
         <>
@@ -52,4 +54,7 @@ export default function Success() {
         </>
     )
 
+    */
 }
+
+export default Success;
