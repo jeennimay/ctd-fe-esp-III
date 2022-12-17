@@ -59,7 +59,7 @@ const Price = styled('p')`
     }
 `
 
-const Thumbnail = styled('img')`
+const Thumb = styled('img')`
     @media (max-screen: 899){
         width:'100%';
     }
@@ -112,7 +112,7 @@ export default function DatailPage(props: DataProps) {
                     }}
                 >
                     <picture>
-                        <Thumbnail
+                        <Thumb
                             src={comic.thumbnail.path + "." + comic.thumbnail.extension}
                             alt={comic.title}
                         />
