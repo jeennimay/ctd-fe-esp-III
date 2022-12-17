@@ -6,7 +6,7 @@ import BodySingle from "dh-marvel/components/layouts/body/single/body-single";
 import { BuyBtn } from "dh-marvel/components/layouts/body/buybtn/body-buybtn";
 
 import { styled } from '@mui/system';
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, CardMedia } from "@mui/material";
 import { BodySmallCard } from "dh-marvel/components/layouts/body/card/body-smallCard";
 
 interface DataProps {
@@ -59,12 +59,6 @@ const Price = styled('p')`
     }
 `
 
-const Thumb = styled('img')`
-    @media (max-screen: 899){
-        width:'100%';
-    }
-`
-
 export default function DatailPage(props: DataProps) {
     const comic = props?.data;
 
@@ -111,12 +105,14 @@ export default function DatailPage(props: DataProps) {
                         padding: { lg: '2rem' }
                     }}
                 >
-                    <picture>
-                        <Thumb
-                            src={comic.thumbnail.path + "." + comic.thumbnail.extension}
-                            alt={comic.title}
-                        />
-                    </picture>
+                    <CardMedia
+                        component="img"
+                        sx={{
+                            maxWidth: {xs:'80%', md: '40%'},
+                        }}
+                        src={comic.thumbnail.path + "." + comic.thumbnail.extension}
+                        alt={comic.title}
+                    />
                     <Box
                         display='flex'
                         justifyContent='center'
